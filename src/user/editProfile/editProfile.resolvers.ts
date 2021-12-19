@@ -4,10 +4,16 @@ import jwt from "jsonwebtoken";
 import { protectResolver } from "../user.utils";
 
 const resolverFn = async (
-  _,
-  { firstName, lastName, userName, email, password },
-  { loggedInUser }
+  // _,
+  // { firstName, lastName, userName, email, password },
+  // { loggedInUser }
+  root,
+  arg,
+  context,
+  info
 ) => {
+  const { firstName, lastName, userName, email, password } = arg;
+  const { loggedInUser } = context;
   // protectResolver(loggedInUser);
   // if (!loggedinUser) {
   //   return { ok: false, error: "can't update profile" };
