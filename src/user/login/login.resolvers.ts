@@ -1,12 +1,10 @@
-// import bcrypt from "bcrypt";
-// import jwt from "jsonwebtoken";
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-import client from "../../client";
+import { Resolvers } from "../../types";
 
-export default {
+const resolver: Resolvers = {
   Mutation: {
-    login: async (_, { userName, password }) => {
+    login: async (_, { userName, password }, { client }) => {
       const user = await client.user.findUnique({ where: { userName } });
       if (!user) {
         return { ok: false, error: "There is no user" };
@@ -20,3 +18,4 @@ export default {
     },
   },
 };
+export default resolver;

@@ -1,23 +1,12 @@
-import client from "../../client";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+// import bcrypt from "bcrypt";
+// import jwt from "jsonwebtoken";
+const bcrypt = require("bcrypt");
 import { protectResolver } from "../user.utils";
+import { Resolver, Resolvers } from "../../types";
 
-const resolverFn = async (
-  // _,
-  // { firstName, lastName, userName, email, password },
-  // { loggedInUser }
-  root,
-  arg,
-  context,
-  info
-) => {
+const resolverFn: Resolver = async (root, arg, context, info) => {
   const { firstName, lastName, userName, email, password } = arg;
-  const { loggedInUser } = context;
-  // protectResolver(loggedInUser);
-  // if (!loggedinUser) {
-  //   return { ok: false, error: "can't update profile" };
-  // }
+  const { loggedInUser, client } = context;
   let uglyPassword = null;
   if (password) {
     uglyPassword = await bcrypt.hash(password, 10);
@@ -42,8 +31,9 @@ const resolverFn = async (
   }
 };
 
-export default {
+const resolver: Resolvers = {
   Mutation: {
     editProfile: protectResolver(resolverFn),
   },
 };
+export default resolver;
