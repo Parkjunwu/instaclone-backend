@@ -12,6 +12,7 @@ const apollo = new ApolloServer({
   resolvers,
   typeDefs,
   playground:true,
+  introspection:true,
   context: async (context) => {
     if(context.req){
       return {
