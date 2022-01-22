@@ -11,8 +11,10 @@ const PORT = process.env.PORT;
 const apollo = new ApolloServer({
   resolvers,
   typeDefs,
+  /////////여기 밑에 두개 지워라/////
   playground:true,
   introspection:true,
+  ////////여기 위에 두개 지워라///////
   context: async (context) => {
     if(context.req){
       return {
