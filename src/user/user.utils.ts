@@ -56,7 +56,23 @@ export const getUser = async (token) => {
 export const protectResolver =
   (ourResolver: Resolver) => (root, arg, context, info) => {
     if (!context.loggedInUser) {
+      if(info.operation.operation === "query") return null
       return { ok: false, error: "Please log in to perform this action" };
+    }
+    return ourResolver(root, arg, context, info);
+  };
+
+export const userCheckResolver =
+  (ourResolver: Resolver, errorMessage: String = "That user doesn't exist") =>
+  async (root, arg, context, info) => {
+    const { client } = context;
+    const { userName } = arg;
+    const ok = await client.user.findUnique({
+      where: { userName },
+      select: { id: true },
+    });
+    if (!ok) {
+      return { ok: false, error: errorMessage };
     }
     return ourResolver(root, arg, context, info);
   };

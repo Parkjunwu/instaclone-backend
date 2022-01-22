@@ -1,0 +1,9 @@
+"use strict";
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var apollo_server_express_1 = require("apollo-server-express");
+exports.default = (0, apollo_server_express_1.gql)(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  type Photo {\n    id:Int!\n    user:User!\n    hashTags:[HashTag]\n    file:String!\n    caption:String\n    createdAt: String!\n    updatedAt: String!\n    likes:Int!\n    comments:[Comment]\n    commentNumber:Int!\n    isMine:Boolean!\n    isLiked:Boolean!\n  }\n  type hashTagPhotosResult {\n    photos:[Photo]\n    page:Int\n    cursorId:Int\n  }\n  type HashTag {\n    id:Int!\n    # photos:[Photo]\n    photos(\n      page:Int\n      cursorId:Int\n    ):hashTagPhotosResult\n    hashTag:String!\n    createdAt: String!\n    updatedAt: String!\n    totalPhotos:Int\n  }\n  type like {\n    id:Int!\n    photo:Photo!\n    createdAt: String!\n    updatedAt: String!\n  }\n"], ["\n  type Photo {\n    id:Int!\n    user:User!\n    hashTags:[HashTag]\n    file:String!\n    caption:String\n    createdAt: String!\n    updatedAt: String!\n    likes:Int!\n    comments:[Comment]\n    commentNumber:Int!\n    isMine:Boolean!\n    isLiked:Boolean!\n  }\n  type hashTagPhotosResult {\n    photos:[Photo]\n    page:Int\n    cursorId:Int\n  }\n  type HashTag {\n    id:Int!\n    # photos:[Photo]\n    photos(\n      page:Int\n      cursorId:Int\n    ):hashTagPhotosResult\n    hashTag:String!\n    createdAt: String!\n    updatedAt: String!\n    totalPhotos:Int\n  }\n  type like {\n    id:Int!\n    photo:Photo!\n    createdAt: String!\n    updatedAt: String!\n  }\n"])));
+var templateObject_1;
